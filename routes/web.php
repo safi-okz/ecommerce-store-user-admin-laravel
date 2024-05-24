@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin'], function() {
             Route::get('/sub-category', [SubCategoryController::class, 'index'])->name('sub-categories.index');
             Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-categories.create');
             Route::post('/sub-category', [SubCategoryController::class, 'store'])->name('sub-categories.store');
+            Route::get('/sub-category/{subCategory}/edit', [SubCategoryController::class, 'edit'])->name('sub-categories.edit');
 
             Route::get('/getSlug', function(Request $request) {
                 $slug = '';

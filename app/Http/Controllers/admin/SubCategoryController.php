@@ -55,4 +55,19 @@ class SubCategoryController extends Controller
             ]);
         }
     }
+
+    public function edit($id, Request $request) {
+        $subCategory = SubCategory::find($id);
+
+        if(empty($subCategory)) {
+            $request->session()->flash('error', 'Record not found');
+            return redirect()->route('sub-categories.index');
+        }
+
+        $category = Category::orderBy('name', 'ASC')->get();
+        $data['categories'] = $category;
+        $data['subCategory'] = $subCategory;
+        return view('admin.sub_category.edit', $data);
+
+    }
 }
