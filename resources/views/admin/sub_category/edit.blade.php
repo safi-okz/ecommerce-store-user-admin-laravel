@@ -81,8 +81,8 @@ $('#subCategoryForm').submit(function(event){
         event.preventDefault();
         var element = $(this)
         $.ajax({
-            url: '{{ route("sub-categories.store") }}',
-            type: 'post',
+            url: '{{ route("sub-categories.update", $subCategory->id) }}',
+            type: 'put',
             data: element.serializeArray(),
             dataType: 'json',
             success: function(response){
@@ -95,6 +95,10 @@ $('#subCategoryForm').submit(function(event){
                     $('#slug').removeClass('is-invalid').siblings('p')
                     .removeClass('invalid-feedback').html('');
                 } else {
+                    if(response['notFound'] == true) {
+                        window.location.href = "{{ route('sub-categories.index') }}";
+                        return false;
+                    }
                 var errors = response['error'];
                 if(errors['name']){
                     $('#name').addClass('is-invalid').siblings('p')

@@ -113,7 +113,7 @@
 @section('customJs')
 <script>
    function deleteCategory(id) {
-        var url = '{{ route("categories.delete", "ID") }}';
+        var url = '{{ route("sub-categories.delete", "ID") }}';
         let newUrl = url.replace('ID', id);
 
         if(confirm('Are you sure want to delete')) {
@@ -127,7 +127,7 @@
     },
             success: function(response){
                 if(response['status']) {
-                    return window.location.href = "{{ route('categories.index')}}";
+                    return window.location.href = "{{ route('sub-categories.index')}}";
                 }
             }
         });

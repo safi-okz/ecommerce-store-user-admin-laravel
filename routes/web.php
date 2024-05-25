@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminLoginController;
+use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\TempImagesController;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +52,12 @@ Route::group(['prefix' => 'admin'], function() {
             Route::get('/sub-category/create', [SubCategoryController::class, 'create'])->name('sub-categories.create');
             Route::post('/sub-category', [SubCategoryController::class, 'store'])->name('sub-categories.store');
             Route::get('/sub-category/{subCategory}/edit', [SubCategoryController::class, 'edit'])->name('sub-categories.edit');
+            Route::put('/sub-category/{subCategory}', [SubCategoryController::class, 'update'])->name('sub-categories.update');
+            Route::delete('/sub-category/{subCategory}', [SubCategoryController::class, 'destroy'])->name('sub-categories.delete');
+
+            // Brand Routes
+            Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+
 
             Route::get('/getSlug', function(Request $request) {
                 $slug = '';
