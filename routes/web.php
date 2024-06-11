@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\TempImagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
+use App\Http\Controllers\admin\ProductController;
 use Illuminate\Http\Request;
 
 /*
@@ -63,6 +64,8 @@ Route::group(['prefix' => 'admin'], function() {
             Route::put('/brand/{brands}', [BrandController::class, 'update'])->name('brand.update');
             Route::delete('/brand/{brands}', [BrandController::class, 'destroy'])->name('brand.delete');
 
+            // Product
+            Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
 
             Route::get('/getSlug', function(Request $request) {
                 $slug = '';
