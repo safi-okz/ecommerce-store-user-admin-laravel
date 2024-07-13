@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\SubCategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProductSubCategoryController;
 use Illuminate\Http\Request;
 
 /*
@@ -66,6 +67,8 @@ Route::group(['prefix' => 'admin'], function() {
 
             // Product
             Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
+            Route::get('/product-subcategories', [ProductSubCategoryController::class, 'index'])->name('product-subcategories.index');
+            Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
             Route::get('/getSlug', function(Request $request) {
                 $slug = '';
