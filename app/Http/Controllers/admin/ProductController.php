@@ -22,6 +22,8 @@ class ProductController extends Controller
     }
 
     public function store(Request $request) {
+        dd($request->image_array);
+        exit();
         $rules = [
             'title' => 'required',
             'slug' => 'required|unique:products',
