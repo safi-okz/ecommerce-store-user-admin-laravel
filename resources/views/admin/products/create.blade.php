@@ -257,8 +257,11 @@ $(document).ready(function() {
             success: function(response) {
                 $("button[type='submit']").prop('disabled', false);
                 if (response.status === true) {
-                    // Handle success (e.g., display a success message, redirect, etc.)
-                    alert('Product created successfully!');
+
+                    $(".error").removeClass('invalid-feedback').html('');
+                    $("input[type='text'], select, input[type='number']").removeClass('is-invalid');
+
+                    window.location.href = "{{ route('product.index') }}";
                 } else {
                     // Handle validation errors
                     let errors = response.error;
@@ -352,17 +355,25 @@ const dropzone = $("#image").dropzone({
         //console.log(response)
 
         var html = `
-                    <div class="col-md-3">
+                    <div class="col-md-3" id="image-row-${response.image_id}">
                     <input type="hidden" name="image_array[]" value="${response.image_id}"
                     <div class="card" style="width: 18rem;">
                     <img src="${response.imagePath}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a href="javascript:void(0)" onclick="deleteImage(${response.image_id})" class="btn btn-danger">Delete</a>
                     </div>
                     </div>
                     </div>`
             $('#product-gallery').append(html);
+    },
+
+    complete: function(file) {
+        this.removeFile(file);
     }
 });
+
+function deleteImage(id) {
+    $(`#image-row-${id}`).remove();
+}
 </script>
 @endsection
